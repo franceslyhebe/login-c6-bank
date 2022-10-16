@@ -12,7 +12,10 @@ import Grid from '@mui/material/Grid';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
 import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-import SnackbarPage from '../uitls/Snackbar/SnackbarPage';
+import AlertPage from '../uitls/Alert/AlertPage';
+
+
+
 
 function Copyright(props: any) {
   return (
@@ -42,34 +45,42 @@ export default function SignInSide() {
     const [errorMessage, setErrorMessage] = useState<string>('');
     const [open, setOpen] = useState(false);
 
-  const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
-    const data = new FormData(event.currentTarget);
-    setPassword(data.get('password'));
-    console.log({
-      email: data.get('email'),
-      password: data.get('password'),
-    });
-  };
 
-    useEffect(()=>{
-        
-        if(password && password.length < 6){
-            setError(true);
-            setErrorMessage('A senha precisa ter no mínimo 6 caracteres');
-        }else if(password){
-            setError(false);
-            setErrorMessage('');
-            setOpen(true);
-        }
+const handleClose = () =>{
+    setOpen(false);
+}
 
-    },[password]);
+const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
+  event.preventDefault();
+
+  const data = new FormData(event.currentTarget);
+  setPassword(data.get('password'));
+  console.log({
+    email: data.get('email'),
+    password: data.get('password'),
+  });
+};
+
+useEffect(()=>{
+
+  if(password && password.length < 6){
+      setError(true);
+      setErrorMessage('A senha deve conter pelo menos 6 caracteres');
+  }else if(password){
+      setError(false);
+      setErrorMessage('');
+      setOpen(true);
+  }
+
+},[password]);
 
   return (
     <ThemeProvider theme={theme}>
       <Grid container component="main" sx={{ height: '100vh' }}>
         <CssBaseline />
-    
+        <AlertPage />
+
+
         <Grid
           item
           xs={false}
@@ -95,16 +106,18 @@ export default function SignInSide() {
             <Avatar sx={{ m: 1, bgcolor: '#FF5800' }}>
               <LockOutlinedIcon />
             </Avatar>
+
             <Typography component="h1" variant="h5" style={{color:'#FF5800'}}>
               Login
             </Typography>
-            <Box component="form" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }} style={{color:'#FF5800'}}>
+
+            <Box component="form" method="POST" noValidate onSubmit={handleSubmit} sx={{ mt: 1 }} style={{color:'#FF5800'}}>
               <TextField
                 margin="normal"
                 required
                 fullWidth
                 id="email"
-                label="Email Address"
+                label="Endereço de E-mail"
                 name="email"
                 autoComplete="email"
                 autoFocus
@@ -114,7 +127,7 @@ export default function SignInSide() {
                 required
                 fullWidth
                 name="password"
-                label="Password"
+                label="Senha"
                 type="password"
                 id="password"
                 autoComplete="current-password"
@@ -123,6 +136,7 @@ export default function SignInSide() {
                 control={<Checkbox value="remember" />}
                 label="Lembre-me"
               />
+
               <Button
                 type="submit"
                 fullWidth
@@ -131,6 +145,7 @@ export default function SignInSide() {
               >
                 Login
               </Button>
+
               <Grid container>
                 <Grid item xs>
                   <Link href="#" underline="none" variant="body2" style={{color:'#FF5800'}}>

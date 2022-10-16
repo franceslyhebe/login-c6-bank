@@ -1,32 +1,38 @@
-import React from 'react'
-import MuiAlert, { AlertProps } from '@mui/material/Alert';
-import SnackbarPage from '../Snackbar/SnackbarPage';
+import React, {useState, useEffect} from 'react';
+import Alert from '@mui/material/Alert';
+import Stack from '@mui/material/Stack';
+import { Snackbar } from '@mui/material';
 
-const Alert = React.forwardRef<HTMLDivElement, AlertProps>(function Alert(
-  props,
-  ref,
-) {
-  return <MuiAlert elevation={6} ref={ref} variant="filled" {...props} />;
-});
+export default function BasicAlerts() {
+  const [open, setOpen] = useState(false);
+  const [error, setError] = useState<string | boolean>(true);
+  const [errorMessage, setErrorMessage] = useState<string>('');
+  const [password, setPassword] = useState<string | undefined | null | FormDataEntryValue>('');
 
-export default function CustomizedSnackbars() {
-  const [open, setOpen] = React.useState(false);
+  const handleClose = () =>{
+      setOpen(false);
+  }
 
-  const handleClick = () => {
-    setOpen(true);
-  };
+  useEffect(()=>{
 
-  const handleClose = (event?: React.SyntheticEvent | Event, reason?: string) => {
-    if (reason === 'clickaway') {
-      return;
+    if(password && password.length < 6){
+        setError(true);
+        setErrorMessage('A senha deve conter pelo menos 6 caracteres');
+    }else if(password){
+        setError(false);
+        setErrorMessage('');
+        setOpen(true);
     }
 
-    setOpen(false);
-  };
-
+},[password]);
   return (
-      <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
-        This is a success message!
-      </Alert>
+
+    <Stack>
+          <Snackbar open={open} autoHideDuration={3000} onClose={() => {}}>
+          <Alert onClose={handleClose} severity="success" sx={{ width: '100%' }}>
+            Usuário logado com sucesso! ...Aguarde...
+          </Alert>
+          </Snackbar>
+      </Stack>
   );
 }
