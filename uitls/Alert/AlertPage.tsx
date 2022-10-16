@@ -13,18 +13,7 @@ export default function BasicAlerts() {
       setOpen(false);
   }
 
-  useEffect(()=>{
 
-    if(password && password.length < 6){
-        setError(true);
-        setErrorMessage('A senha deve conter pelo menos 6 caracteres');
-    }else if(password){
-        setError(false);
-        setErrorMessage('');
-        setOpen(true);
-    }
-
-},[password]);
   return (
 
     <Stack>
