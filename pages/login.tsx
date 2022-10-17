@@ -1,30 +1,9 @@
 import React, {useEffect, useState} from 'react'
-import Avatar from '@mui/material/Avatar';
-import Button from '@mui/material/Button';
-import CssBaseline from '@mui/material/CssBaseline';
-import TextField from '@mui/material/TextField';
-import FormControlLabel from '@mui/material/FormControlLabel';
-import Checkbox from '@mui/material/Checkbox';
-import Link from '@mui/material/Link';
-import Paper from '@mui/material/Paper';
-import Box from '@mui/material/Box';
-import Grid from '@mui/material/Grid';
+import { Avatar, Button, CssBaseline, TextField, FormControlLabel, Checkbox, Paper, Box, Grid, Typography, Link } from '@mui/material';
 import LockOutlinedIcon from '@mui/icons-material/LockOutlined';
-import Typography from '@mui/material/Typography';
 import { createTheme, ThemeProvider } from '@mui/material/styles';
-
-function Copyright(props: any) {
-  return (
-    <Typography variant="body2" color="text.secondary" align="center" {...props}>
-      {'Copyright © '}
-      <Link color="inherit" href="https://avanade.com.br/">
-        Avanade
-      </Link>{' '}
-      {new Date().getFullYear()}
-      {'.'}
-    </Typography>
-  );
-}
+import Copyright from '../components/uitls/Copyright';
+import Snackbar from '../components/uitls/Snackbar/Snackbar';
 
 const theme = createTheme({
         palette:{
@@ -42,9 +21,7 @@ export default function SignInSide() {
     const [open, setOpen] = useState(false);
 
 
-const handleClose = () =>{
-    setOpen(false);
-}
+
 
 const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
   event.preventDefault();
@@ -152,7 +129,8 @@ useEffect(()=>{
                 </Grid>
               </Grid>
               {error && <Typography>{errorMessage}</Typography>}
-              <Copyright sx={{ mt: 5 }} />
+              <Copyright />
+              {open && <Snackbar open={open} hide={5} message={'Usuário logado com sucesso'} severity="success" /> }
 
             </Box>
           </Box>
