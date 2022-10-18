@@ -24,8 +24,10 @@ export default function Login() {
   const handleSubmit = (event: React.FormEvent<HTMLFormElement>) => {
     event.preventDefault();
 
+
     const data = new FormData(event.currentTarget);
     setPassword(data.get('password'));
+
     console.log({
       email: data.get('email'),
       password: data.get('password'),
@@ -42,6 +44,7 @@ export default function Login() {
         setErrorMessage('');
         setOpen(true);
     }
+
 
   },[password]);
 
