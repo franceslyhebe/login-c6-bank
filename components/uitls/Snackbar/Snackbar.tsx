@@ -16,8 +16,6 @@ type SnackbarProps = {
   severity?: AlertColor;
 }
 
-
-
 export default function Snackbar(props: SnackbarProps) {
   const [open, setOpen] = useState<boolean>(props.open);
 

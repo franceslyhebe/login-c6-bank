@@ -1,8 +1,14 @@
 import React from 'react';
-import Login from '../components/Form/Login';
+import Register from '../components/Form/Register';
+
+
+
 
 export default function SignInSide() {
+
+
   return (
-         <Login />
+         <Register />
+
   );
   }
