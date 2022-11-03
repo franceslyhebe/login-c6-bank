@@ -1,12 +1,15 @@
 import React from 'react'
 import styled from '@emotion/styled'
 import { Avatar } from '@mui/material'
+import Link from 'next/link'
+import {CiBank} from 'react-icons/ci'
 
 const ProfileContainer = styled.div`
   display: flex;
   flex-direction: column;
   align-items: center;
   justify-content: center;
+  padding-top: 15px;
   width: 100%;
   height: 300px;
   background-color: #242424;
@@ -18,9 +21,10 @@ const ProfileContainer = styled.div`
 const Account = styled.div`
   display: flex;
   width: 80%;
-  border: solid 0.5 #888;
+  border: 0.8px solid #3f3f3f;
   border-radius: 4px;
-  margin-top: 2%;
+  margin-top: 5%;
+  margin-bottom: 5%;
   div:first-child{
     width: 80%;
     padding-left: 20px;
@@ -51,7 +55,10 @@ export default function Profile(props: ProfileProps) {
           <p>Ag: {props.agency} C/C: {props.accountNumber}</p>
         </div>
         <div>
-          Icone
+          <Link href='#'>
+            <CiBank fontSize="large"/>
+          </Link>
+
         </div>
       </Account>
     </ProfileContainer>

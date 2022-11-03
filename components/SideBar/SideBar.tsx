@@ -7,7 +7,6 @@ import MenuContainer from '../Menu'
 const SideBarContainer = styled.div`
   display:flex;
   flex-direction: column;
-
   width: 360px
 `
 
